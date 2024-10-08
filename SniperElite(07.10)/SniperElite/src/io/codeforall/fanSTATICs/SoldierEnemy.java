@@ -1,2 +1,4 @@
-package io.codeforall.fanSTATICs;public class SoldierEnemy {
+package io.codeforall.fanSTATICs;
+
+public class SoldierEnemy extends Enemy{
 }

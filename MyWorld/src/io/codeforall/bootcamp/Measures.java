@@ -13,6 +13,9 @@ public class Measures {
     }
 
     public Measures(float width) {
+        if (lenght =) {
+            lenght = width;
+        }
     }
 
     public float Area(float number1, float number2) {
