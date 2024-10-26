@@ -1,4 +1,4 @@
-package io.codeforall.bootcamp;
+package io.codeforall.fanstatics;
 
 import java.io.*;
 import java.net.ServerSocket;
@@ -59,25 +59,22 @@ public class WebServer {
     private void serve(ServerSocket bindSocket) {
 
         while (true) {
-
             try {
-                    if(
-                Socket clientSocket = bindSocket.accept();)
-                        thread....
+                Socket clientSocket = bindSocket.accept();
                 logger.log(Level.INFO, "new connection from " + getAddress(clientSocket));
 
-                dispatch(clientSocket);
-
+                // Criar uma nova Thread para cada cliente
+                Client client = new Client(clientSocket, this);
+                Thread clientThread = new Thread(client);
+                clientThread.start();
 
             } catch (IOException e) {
-
                 logger.log(Level.SEVERE, e.getMessage());
-
             }
         }
     }
 
-    private void dispatch(Socket clientSocket) {
+    public void dispatch(Socket clientSocket) {
 
         try {
 
