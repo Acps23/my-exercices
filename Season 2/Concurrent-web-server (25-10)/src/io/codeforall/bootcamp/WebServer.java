@@ -60,11 +60,13 @@ public class WebServer {
 
         while (true) {
             try {
+                // Accept an incoming client connection
                 Socket clientSocket = bindSocket.accept();
                 logger.log(Level.INFO, "new connection from " + getAddress(clientSocket));
 
-                // Criar uma nova Thread para cada cliente
+                // Create a new Client instance for the connected client
                 Client client = new Client(clientSocket, this);
+                // Start a new thread to handle the client request
                 Thread clientThread = new Thread(client);
                 clientThread.start();
 
@@ -74,6 +76,7 @@ public class WebServer {
         }
     }
 
+    //Change to public to allow Client to access the dispatch() method
     public void dispatch(Socket clientSocket) {
 
         try {
