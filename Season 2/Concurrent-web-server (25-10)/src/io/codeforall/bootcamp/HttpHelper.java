@@ -1,4 +1,4 @@
-package io.codeforall.bootcamp;
+package io.codeforall.fanstatics;
 
 public class HttpHelper {
 

@@ -14,11 +14,11 @@ public class Client implements Runnable {
     public Client(Socket clientSocket, WebServer server) {
         this.clientSocket = clientSocket;
         this.server = server;
-    }
+    }  // Constructor accepting the client Socket and a reference to the WebServer
 
     @Override
     public void run() {
-        server.dispatch(clientSocket);
+        server.dispatch(clientSocket);   // Call the dispatch method in WebServer to handle the request
     }
 }
 
