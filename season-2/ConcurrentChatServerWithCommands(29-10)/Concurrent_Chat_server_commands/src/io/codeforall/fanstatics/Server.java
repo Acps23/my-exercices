@@ -9,7 +9,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Server {
-    private static List<ServerWorker> clientList = Collections.synchronizedList(new LinkedList<>());
+    private final static List<ServerWorker> clientList = Collections.synchronizedList(new LinkedList<>());
 
     public static void main(String[] args) {
         try {

@@ -123,7 +123,7 @@ public class ServerWorker implements Runnable {
                 "1. changename <newName> - Change your username.\n" +
                 "2. quit - Exit the chat.\n" +
                 "3. whisper <targetName> <message> - Send a private message to a specific user.\n" +
-                "4. List - Show all connected users.";
+                "4. List - Show all connected users.\n";
         out.println(helpMessage);
     }
 
@@ -134,7 +134,8 @@ public class ServerWorker implements Runnable {
         }
         out.println(clientNames);
     }
+
+
 }
 
-//help
 //changecolour
