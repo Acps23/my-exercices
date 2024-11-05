@@ -5,10 +5,11 @@ import io.codeforall.fanstatics.Abilitys.ShieldBlock;
 public class Warrior extends Hero {
     private ShieldBlock shieldBlock;
     private boolean shieldActive = false; // Tracks if the shield is currently active
-
+    private static int initialDefense; // Store the initial defense value
     public Warrior(int health, int mana, int attack, int defense) {
         super(health, mana, attack, defense, new ShieldBlock());
         this.shieldBlock = new ShieldBlock();
+        this.initialDefense = defense;
     }
 
     public void activateShieldBlock() {
@@ -22,15 +23,19 @@ public class Warrior extends Hero {
         if (shieldActive) { // Check if the shield is currently active
             shieldBlock.removeShield(this); // Remove the shield effect
             shieldActive = false; // Set shieldActive to false
+
         }
     }
 
+    public int getInitialDefense() {
+        return initialDefense;
+    }
     public void increaseDefense(int amount) {
-        setDefense(getDefense() + amount);
+        setDefense(initialDefense + amount);
     }
 
-    public void decreaseDefense(int amount) {
-        setDefense(getDefense() - amount);
+    public void decreaseDefense(int initialDefense) {
+        setDefense(initialDefense);
     }
 
     @Override

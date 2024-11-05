@@ -6,7 +6,7 @@ public class Fireball extends AbstractAbility {
     private int fireballDamage = 35;// Damage dealt by the Fireball ability
 
     public Fireball() {
-        super(20);
+        super(30);
     } // Initialize the Fireball ability with a mana cost of 20
 
     @Override

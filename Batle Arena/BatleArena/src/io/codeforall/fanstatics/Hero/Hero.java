@@ -53,6 +53,10 @@ public abstract class Hero {
         return Math.max(mana, 0);
     }// Return the hero's mana, ensuring it's not negative
 
+    public void setMana(int mana) {
+        this.mana = mana;
+    }
+
     public int getAttack() {
         return attack;
     }
@@ -93,5 +97,9 @@ public abstract class Hero {
     public void attackHero(Hero target) {
         System.out.println(this.getClass().getSimpleName() + " attacks " + target.getClass().getSimpleName() + " for " + attack + " damage!");
         target.receiveDamage(attack);
+    }
+
+    public void incrementMana(int increment) {
+        setMana(mana + increment);
     }
 }

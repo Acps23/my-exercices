@@ -8,7 +8,7 @@ public class ShieldBlock extends AbstractAbility {
     private int shieldProtect = 15; // Amount of defense increase provided by ShieldBlock
 
     public ShieldBlock() {
-        super(15);
+        super(60);
     }// Initialize the ShieldBlock ability with a mana cost
 
     public void applyShield(Warrior warrior) {
