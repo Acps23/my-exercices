@@ -11,10 +11,10 @@ public class ShieldBlock extends AbstractAbility {
         super(15);
     }// Initialize the ShieldBlock ability with a mana cost
 
-    public void applyShield (Warrior warrior) {
+    public void applyShield(Warrior warrior) {
         warrior.increaseDefense(10);
         System.out.println("ShieldBlock applied! Defense increased by " + shieldProtect + ".");
-        }
+    }
 
     public void removeShield(Warrior warrior) {
         warrior.decreaseDefense(shieldProtect);

@@ -3,7 +3,7 @@ package io.codeforall.fanstatics.Abilitys;
 import io.codeforall.fanstatics.Hero.Hero;
 
 public class Fireball extends AbstractAbility {
-    private int fireballDamage = 30;// Damage dealt by the Fireball ability
+    private int fireballDamage = 35;// Damage dealt by the Fireball ability
 
     public Fireball() {
         super(20);

@@ -23,37 +23,11 @@ public class TurnManager {
                     boolean useAbility = Math.random() < 0.3; // 30% chance to use an ability
 
                     if (currentHero instanceof Warrior) {
-                        Warrior warrior = (Warrior) currentHero;
-                        if (shieldBlockDuration > 0) {
-                            System.out.println("Warrior's ShieldBlock remains active for " + shieldBlockDuration + " more turns.");
-                            shieldBlockDuration--;
-                            if (shieldBlockDuration == 0) {
-                                warrior.desactivateShieldBlock(); // Desactivate ShieldBlock when duration ends
-                            }
-                        } else if (useAbility && warrior.canUseAbility()) {
-                            warrior.useAbility(target);
-                            shieldBlockDuration = 2; // Set ShieldBlock duration
-                        } else {
-                            warrior.attackHero(target);
-                        }
+                        handleWarriorTurn((Warrior) currentHero, target, useAbility);
                     } else if (currentHero instanceof Cleric) {
-                        Cleric cleric = (Cleric) currentHero;
-                        if (useAbility && cleric.canUseAbility()) {
-                            cleric.useAbility(cleric); // Cleric uses healing ability on itself
-                            Hero attackTarget = getRandomTarget(currentHero); // Cleric also attacks a random target
-                            if (attackTarget != null) {
-                                System.out.println(cleric.getClass().getSimpleName() + " attacks " + attackTarget.getClass().getSimpleName() + " for " + cleric.getAttack() + " damage!");
-                                attackTarget.receiveDamage(cleric.getAttack());
-                            }
-                        } else {
-                            cleric.attackHero(target);
-                        }
+                        handleClericTurn((Cleric) currentHero, target, useAbility);
                     } else {
-                        if (useAbility && currentHero.canUseAbility()) {
-                            currentHero.useAbility(target);
-                        } else {
-                            currentHero.attackHero(target);
-                        }
+                        handleGenericHeroTurn(currentHero, target, useAbility);
                     }
 
                     if (isOnlyOneHeroAlive()) { // Check if only one hero is left alive
@@ -67,18 +41,55 @@ public class TurnManager {
         }
     }
 
-    private void announceWinner() {
-            Hero winner = null;
-            for (Hero hero : heroes) {
-                if (hero.isAlive()) {
-                    winner = hero;
-                    break;
-                }
+    private void handleWarriorTurn(Warrior warrior, Hero target, boolean useAbility) {
+        if (shieldBlockDuration > 0) {
+            System.out.println("Warrior's ShieldBlock remains active for " + shieldBlockDuration + " more turns.");
+            shieldBlockDuration--;
+            if (shieldBlockDuration == 0) {
+                warrior.desactivateShieldBlock(); // Deactivate ShieldBlock when duration ends
             }
-            if (winner != null) {
-                System.out.println(winner.getClass().getSimpleName() + " is the winner!" + "\n");
+        } else if (useAbility && warrior.canUseAbility()) {
+            warrior.useAbility(target);
+            shieldBlockDuration = 2; // Set ShieldBlock duration
+        } else {
+            warrior.attackHero(target);
+        }
+    }
+
+    private void handleClericTurn(Cleric cleric, Hero target, boolean useAbility) {
+        if (useAbility && cleric.canUseAbility()) {
+            cleric.useAbility(cleric); // Cleric uses healing ability on itself
+            Hero attackTarget = getRandomTarget(cleric); // Cleric also attacks a random target
+            if (attackTarget != null) {
+                System.out.println(cleric.getClass().getSimpleName() + " attacks " + attackTarget.getClass().getSimpleName() + " for " + cleric.getAttack() + " damage!");
+                attackTarget.receiveDamage(cleric.getAttack());
+            }
+        } else {
+            cleric.attackHero(target);
+        }
+    }
+
+    private void handleGenericHeroTurn(Hero hero, Hero target, boolean useAbility) {
+        if (useAbility && hero.canUseAbility()) {
+            hero.useAbility(target);
+        } else {
+            hero.attackHero(target);
+        }
+    }
+
+
+    private void announceWinner() {
+        Hero winner = null;
+        for (Hero hero : heroes) {
+            if (hero.isAlive()) {
+                winner = hero;
+                break;
             }
         }
+        if (winner != null) {
+            System.out.println(winner.getClass().getSimpleName() + " is the winner!" + "\n");
+        }
+    }
 
     private Hero getRandomTarget(Hero attacker) {
         int numHeroes = heroes.size();
