@@ -22,9 +22,7 @@ public class TurnManager {
                 if (target != null) {
                     boolean useAbility = Math.random() < 0.3; // 30% chance to use an ability
 
-                    if (currentHero instanceof Warrior) {
-                        handleWarriorTurn((Warrior) currentHero, target, useAbility);
-                    } else if (currentHero instanceof Cleric) {
+                    if (currentHero instanceof Cleric) {
                         handleClericTurn((Cleric) currentHero, target, useAbility);
                     } else {
                         handleGenericHeroTurn(currentHero, target, useAbility);
@@ -38,21 +36,6 @@ public class TurnManager {
                     System.out.println(currentHero.getClass().getSimpleName() + " has no valid targets.");
                 }
             }
-        }
-    }
-
-    private void handleWarriorTurn(Warrior warrior, Hero target, boolean useAbility) {
-        if (shieldBlockDuration > 0) {
-            System.out.println("Warrior's ShieldBlock remains active for " + shieldBlockDuration + " more turns.");
-            shieldBlockDuration--;
-            if (shieldBlockDuration == 0) {
-                warrior.desactivateShieldBlock(); // Deactivate ShieldBlock when duration ends
-            }
-        } else if (useAbility && warrior.canUseAbility()) {
-            warrior.useAbility(target);
-            shieldBlockDuration = 2; // Set ShieldBlock duration
-        } else {
-            warrior.attackHero(target);
         }
     }
 
@@ -76,6 +59,22 @@ public class TurnManager {
             hero.attackHero(target);
         }
     }
+
+    private void handleWarriorDefense(Warrior warrior) {
+        if (warrior.canUseAbility()) {
+            warrior.useAbility(warrior); // Warrior uses defensive ability on itself
+            shieldBlockDuration = 2; // Set ShieldBlock duration
+            System.out.println("Warrior activates ShieldBlock for 2 turns.");
+        }
+    }
+
+    public void attackHero(Hero attacker, Hero target) {
+        if (target instanceof Warrior) {
+            handleWarriorDefense((Warrior) target);
+        }
+        target.receiveDamage(attacker.getAttack());
+    }
+
 
 
     private void announceWinner() {

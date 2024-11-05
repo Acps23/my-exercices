@@ -5,7 +5,7 @@ import io.codeforall.fanstatics.Hero.Hero;
 public abstract class AbstractAbility implements Ability {
     private static int manaCost; // Cost in mana to use the ability
 
-    AbstractAbility(int manaCost) {
+    public AbstractAbility(int manaCost) {
         this.manaCost = manaCost;
     }
 

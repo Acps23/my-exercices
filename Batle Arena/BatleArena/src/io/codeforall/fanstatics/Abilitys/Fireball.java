@@ -11,8 +11,8 @@ public class Fireball extends AbstractAbility {
 
     @Override
     public void execute(Hero target) {
-        target.receiveDamage(fireballDamage);
         System.out.println("Mage use fireball: makes " + fireballDamage + " of damage!");
+        target.receiveDamage(fireballDamage);
     }
 }
 

@@ -11,9 +11,8 @@ public class SneakAttack extends AbstractAbility {
 
     @Override
     public void execute(Hero target) {
-        target.receiveDamage(critDamage);
         System.out.println("Rogue performs a Sneak Attack dealing " + critDamage + " damage!");
-
+        target.receiveDamage(critDamage);
     }
 }
 
