@@ -11,10 +11,9 @@ public class Main {
 
         Prompt prompt = new Prompt(System.in, System.out);
 
-        StringInputScanner message = new StringInputScanner();
+        System.out.println("Welcome to your first Prompt-View Experience!");
+        System.out.println("Insert your login credentials below:");
 
-        message.setMessage("Welcome to your first Prompt-View Experience!");
-        message.setMessage("Insert your login credentials below:");
 
         StringInputScanner username = new StringInputScanner();
         username.setMessage("Username: ");
