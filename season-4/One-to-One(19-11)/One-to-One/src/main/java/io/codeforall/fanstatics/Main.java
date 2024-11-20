@@ -1,28 +1,27 @@
 package io.codeforall.fanstatics;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
+import javax.persistence.*;
 
 public class Main {
     public static void main(String[] args) {
+
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("test");
 
         EntityManager em = emf.createEntityManager();
 
-        //Table per Class
-        Boat boat = new Boat();
-        boat.setEngines(10);
-        boat.setMaxSpeed(50);
+
+        Owner owner = new Owner();
+        owner.setName("Cristina");
+
 
         Car car = new Car();
-        car.setGears(5);
-        car.setMaxSpeed(100);
-
+        car.setModel("Clio");
+        car.setMake("Renault");
+        car.setOwner(owner);
 
         em.getTransaction().begin();
         em.persist(car);
-        em.persist(boat);
+        em.persist(owner);
         em.getTransaction().commit();
 
 
@@ -32,5 +31,4 @@ public class Main {
         // Shutdown JPA
         emf.close();
     }
-    }
-
+}

@@ -14,4 +14,12 @@ public abstract class Vehicle {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private Integer maxSpeed;
+
+    public Integer getMaxSpeed() {
+        return maxSpeed;
+    }
+
+    public void setMaxSpeed(Integer maxSpeed) {
+        this.maxSpeed = maxSpeed;
+    }
 }

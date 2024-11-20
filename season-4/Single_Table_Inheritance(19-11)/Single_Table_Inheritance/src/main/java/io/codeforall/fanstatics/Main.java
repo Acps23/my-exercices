@@ -12,9 +12,12 @@ public class Main {
         //Single Table Inheritance
         Boat boat = new Boat();
         boat.setEngines(10);
+        boat.setMaxSpeed(50);
 
         Car car = new Car();
         car.setGears(5);
+        car.setMaxSpeed(100);
+
 
 
 
